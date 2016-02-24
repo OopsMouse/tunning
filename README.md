@@ -1,6 +1,6 @@
 # tuning
 
-High Performance Browser Networkingに記載のチューニングを実施するChef Recipe
+High Performance Browser Networkingに記載のチューニングを実施するCookbook
 
 ## 実施項目
 
