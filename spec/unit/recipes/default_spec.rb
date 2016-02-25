@@ -7,14 +7,16 @@
 require 'spec_helper'
 
 describe 'tuning::default' do
-  context 'When all attributes are default, on an unspecified platform' do
-    let(:chef_run) do
-      runner = ChefSpec::ServerRunner.new
-      runner.converge(described_recipe)
-    end
+  let(:chef_run) do
+    runner = ChefSpec::ServerRunner.new
+    runner.converge(described_recipe)
+  end
 
-    it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
-    end
+  it 'disable tcp slow start after idle' do
+    expect(chef_run).to run_execute('sysctl -w net.ipv4.tcp_slow_start_after_idle=0')
+  end
+
+  it 'enable tcp window scaling' do
+    expect(chef_run).to run_execute('sysctl -w net.ipv4.tcp_window_scaling=1')
   end
 end
